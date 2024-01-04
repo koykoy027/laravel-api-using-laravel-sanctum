@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,10 +18,15 @@ class StudentFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'firstname' => fake()->firstName(),
+            'middlename' => fake()->lastName(),
+            'lastname' => fake()->lastName(),
             'email' => fake()->unique()->email(),
-            'gender' => fake()->randomElement(['Male', 'Female']),
+            'gender' => fake()->numberBetween(1, 2),
             'mobile_number' => fake()->phoneNumber(),
+            'created_by' => User::all()->random()->id,
+            'updated_by' => User::all()->random()->id,
+
         ];
     }
 }

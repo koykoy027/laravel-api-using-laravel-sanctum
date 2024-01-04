@@ -18,9 +18,14 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'firstname',
+        'middlename',
+        'lastname',
+        'gender',
         'email',
         'password',
+        'created_by',
+        'updated_by',
     ];
 
     /**
@@ -42,4 +47,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function users(){
+        return $this->hasManyThrough(Student::class, 'id');
+    }
 }
