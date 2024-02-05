@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\UserProfile;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -18,13 +19,9 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'firstname' => fake()->firstName(),
-            'middlename' => fake()->lastName(),
-            'lastname' => fake()->lastName(),
-            'gender' => fake()->numberBetween(1, 2),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
             'password' => 'Pa$$w0rd!',
+            'email_verified_at' => now(),
             'remember_token' => Str::random(10),
             'created_by' => fake()->numberBetween(1, 10),
             'updated_by' => fake()->numberBetween(1, 10),

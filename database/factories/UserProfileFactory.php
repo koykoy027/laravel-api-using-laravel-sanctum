@@ -2,30 +2,28 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Student>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\UserProfile>
  */
-class StudentFactory extends Factory
+class UserProfileFactory extends Factory
 {
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
+
+    private static $id = 1;
     public function definition(): array
     {
         return [
+            'id' => self::$id++,
             'firstname' => fake()->firstName(),
             'middlename' => fake()->lastName(),
             'lastname' => fake()->lastName(),
-            'email' => fake()->unique()->email(),
             'gender' => fake()->numberBetween(1, 2),
-            'phone_number' => fake()->phoneNumber(),
-            'created_by' => User::all()->random()->id,
-            'updated_by' => User::all()->random()->id,
         ];
     }
 }

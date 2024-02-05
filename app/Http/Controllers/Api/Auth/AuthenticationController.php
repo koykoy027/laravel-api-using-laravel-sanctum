@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
+use App\Models\UserProfile;
 use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthenticationController extends Controller
 {
@@ -31,28 +33,12 @@ class AuthenticationController extends Controller
 
     public function register(RegisterRequest $request)
     {
-        // longcut
-        // $user = User::create([
-        //     'created_by' => Auth::user()->id,
-        //     'updated_by' => Auth::user()->id,
-        //     'firstname' => $request->firstname,
-        //     'middlename' => $request->middlename,
-        //     'lastname' => $request->lastname,
-        //     'gender' => $request->gender,
-        //     'email' => $request->email,
-        //     'password' => Hash::make($request->password),
-        // ]);
 
-        // shortcut
-        $data = $request->all();
-        $data['created_by'] = Auth::user()->id;
-        $data['updated_by'] = Auth::user()->id;
-        $user = User::create($data);
+        $user = User::registerUser($request);
 
         return $this->success([
             'user' => $user,
             'token' => $user->createToken('API Token of ' . $user->name)->plainTextToken,
-
         ]);
     }
 
