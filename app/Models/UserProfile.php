@@ -18,7 +18,7 @@ class UserProfile extends Model
         'gender',
     ];
 
-    public function userProfile()
+    public function user_profile()
     {
         return $this->belongsTo(User::class, 'id');
     }

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('lastname');
             $table->string('middlename')->nullable();
             $table->integer('gender');
-            $table->timestamps();
         });
     }
 

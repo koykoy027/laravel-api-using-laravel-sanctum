@@ -29,6 +29,16 @@ class User extends Authenticatable
         'updated_by',
     ];
 
+    const ACTIVE = 1;
+    const INACTIVE = 0;
+
+    public static function activeUsers()
+    {
+        $users = self::where('is_active', self::ACTIVE);
+
+        return $users;
+    }
+
     public static function registerUser(RegisterRequest $request)
     {
         $user = self::create([
@@ -48,14 +58,14 @@ class User extends Authenticatable
         return $user;
     }
 
-    public function userProfile()
+    public function user_profile()
     {
         return $this->hasOne(UserProfile::class, 'id');
     }
 
     public function students()
     {
-        $this->hasMany(Student::class, 'id');
+        return $this->hasMany(Student::class, 'created_by');
     }
 
     /**

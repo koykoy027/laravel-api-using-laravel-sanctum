@@ -29,16 +29,16 @@ class StudentResource extends JsonResource
             ],
             'created_by' => [
                 'id' => (string)$this->user_created_by->id,
-                'firstname' => $this->user_created_by->userProfile->firstname,
-                'middlename' => $this->user_created_by->userProfile->middlename,
-                'lastname' => $this->user_created_by->userProfile->lastname,
+                'firstname' => $this->user_created_by->user_profile->firstname,
+                'middlename' => $this->user_created_by->user_profile->middlename,
+                'lastname' => $this->user_created_by->user_profile->lastname,
             ],
 
             'updated_by' => [
                 'id' => (string)$this->user_updated_by->id,
-                'firstname' => $this->user_updated_by->userProfile->firstname,
-                'middlename' => $this->user_updated_by->userProfile->middlename,
-                'lastname' => $this->user_updated_by->userProfile->lastname,
+                'firstname' => $this->user_updated_by->user_profile->firstname,
+                'middlename' => $this->user_updated_by->user_profile->middlename,
+                'lastname' => $this->user_updated_by->user_profile->lastname,
             ],
 
         ];

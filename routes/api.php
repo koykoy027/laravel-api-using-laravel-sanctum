@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthenticationController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StudentController;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -15,6 +16,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/students', 'index');
         Route::get('/students/{id}', 'show');
         Route::post('/students', 'store');
+    });
+
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/users', 'index');
+        Route::get('/users/{id}', 'show');
     });
 });
 
