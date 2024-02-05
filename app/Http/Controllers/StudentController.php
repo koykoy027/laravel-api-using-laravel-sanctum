@@ -24,7 +24,7 @@ class StudentController extends Controller
         $data['created_by'] = Auth::user()->id;
         $data['updated_by'] = Auth::user()->id;
         $student = Student::create($data);
-
+ 
         return new StudentResource($student);
     }
 

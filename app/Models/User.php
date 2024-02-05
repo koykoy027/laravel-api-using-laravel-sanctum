@@ -58,16 +58,6 @@ class User extends Authenticatable
         $this->hasMany(Student::class, 'id');
     }
 
-    // public function createdAndUpdatedModels()
-    // {
-    //     $this->hasManyThrough(
-    //         Student::class,
-    //         User::class,
-    //         'created_by', 'id',
-    //         'id', 'id',
-    //     );
-    // }
-
     /**
      * The attributes that should be hidden for serialization.
      *

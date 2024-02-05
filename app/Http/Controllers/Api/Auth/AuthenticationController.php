@@ -25,6 +25,12 @@ class AuthenticationController extends Controller
         }
 
         $user = User::where('email', $request->email)->first();
+
+        if (!$user || !$user->is_active) {
+            Auth::logout();
+            return $this->error('', 'User is not active', 401);
+        }
+
         return $this->success([
             'user' => $user,
             'token' => $user->createToken('API Token of' . $user->name)->plainTextToken
