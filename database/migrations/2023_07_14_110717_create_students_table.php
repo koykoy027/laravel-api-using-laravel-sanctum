@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('firstname');
             $table->string('lastname');
-            $table->string('middlename');
+            $table->string('middlename')->nullable();
             $table->string('email');
             $table->integer('gender');
-            $table->string('mobile_number');
+            $table->string('phone_number');
             $table->boolean('is_active')->default(true);
-            $table->integer('created_by');
-            $table->integer('updated_by');
+            $table->integer('created_by')->comment('users table primary key');
+            $table->integer('updated_by')->comment('users table primary key');
             $table->timestamps();
         });
     }

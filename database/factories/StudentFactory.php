@@ -23,10 +23,9 @@ class StudentFactory extends Factory
             'lastname' => fake()->lastName(),
             'email' => fake()->unique()->email(),
             'gender' => fake()->numberBetween(1, 2),
-            'mobile_number' => fake()->phoneNumber(),
-            'created_by' => User::all()->random()->id,
-            'updated_by' => User::all()->random()->id,
-
+            'phone_number' => fake()->phoneNumber(),
+            'created_by' => User::factory(),
+            'updated_by' => User::factory(),
         ];
     }
 }
