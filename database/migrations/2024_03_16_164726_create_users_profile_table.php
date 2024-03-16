@@ -17,9 +17,17 @@ return new class extends Migration
                 ->constrained('users')
                 ->onUpdate('cascade');
             $table->string('firstname')->nullable();
-            $table->string('lastname')->nullable();
             $table->string('middlename')->nullable();
-            $table->integer('gender')->comment('global parameters table primary key');
+            $table->string('lastname')->nullable();
+            $table->foreignId('gender')
+                ->nullable()
+                ->constrained('global_parameters');
+            $table->foreignId('civil_status')
+                ->nullable()
+                ->constrained('global_parameters');
+            $table->foreignId('religion')
+                ->nullable()
+                ->constrained('global_parameters');
             $table->timestamps(false);
         });
     }

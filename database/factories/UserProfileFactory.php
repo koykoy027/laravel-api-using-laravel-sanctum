@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
+use App\Models\UserProfile;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,6 +26,8 @@ class UserProfileFactory extends Factory
             'middlename' => fake()->lastName(),
             'lastname' => fake()->lastName(),
             'gender' => fake()->numberBetween(1, 2),
+            'civil_status' => fake()->numberBetween(3, 6),
+            'religion' => fake()->numberBetween(7, 9),
         ];
     }
 }
