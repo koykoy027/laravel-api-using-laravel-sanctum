@@ -27,6 +27,8 @@ class RegisterRequest extends FormRequest
             'lastname' => ['required'],
             'middlename' => ['required'],
             'gender' => ['required'],
+            'civil_status' => ['required'],
+            'religion' => ['required'],
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'confirmed', Password::defaults()],
         ];

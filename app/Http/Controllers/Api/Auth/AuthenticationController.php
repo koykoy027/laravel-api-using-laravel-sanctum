@@ -42,6 +42,8 @@ class AuthenticationController extends Controller
     {
         try {
             DB::beginTransaction();
+
+            
             $user = User::create([
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
@@ -55,6 +57,8 @@ class AuthenticationController extends Controller
                 'middlename' => $request->middlename,
                 'lastname' => $request->lastname,
                 'gender' => $request->gender,
+                'civil_status' => $request->civil_status,
+                'religion' => $request->religion,
             ]);
             DB::commit();
         } catch (\Exception $error) {

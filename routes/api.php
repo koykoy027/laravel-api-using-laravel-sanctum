@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthenticationController;
+use App\Http\Controllers\Api\GlobalParameter\GlobalParameterTypeController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Http\Request;
@@ -18,6 +19,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/users', 'index');
         Route::get('/users/{user}', 'show');
     });
+});
+
+// token not required
+Route::controller(GlobalParameterTypeController::class)->group(function () {
+    Route::get('/global parameter', 'index');
 });
 
 

@@ -6,6 +6,9 @@ namespace App\Models;
 
 use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -25,16 +28,26 @@ class User extends Authenticatable
     const ACTIVE = 1;
     const INACTIVE = 0;
 
-    public static function activeUsers()
+    public static function allActive()
     {
         $users = self::where('is_active', self::ACTIVE);
         return $users;
     }
 
-    public function user_profile()
+    public function userProfile()
     {
         return $this->hasOne(UserProfile::class, 'id');
     }
+
+    public function globalParameterTypeCreated()
+    {
+        return $this->hasMany(GlobalParameterType::class, 'id');
+    }
+
+    
+
+
+    
 
     /**
      * The attributes that should be hidden for serialization.

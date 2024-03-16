@@ -17,9 +17,15 @@ class UserResource extends JsonResource
         return[
             'id' => (string)$this->id,
             'data' => [
-                'firstname' => $this->user_profile->firstname,
-                'middlename' => $this->user_profile->middlename,
-                'lastname' => $this->user_profile->lastname,
+                'firstname' => $this->userProfile->firstname,
+                'middlename' => $this->userProfile->middlename,
+                'lastname' => $this->userProfile->lastname,
+                'gender' => $this->userProfile->globalParameterGender->name ?? null,
+                'civil_status' => $this->userProfile->globalParameterCivilStatus->name ?? null,
+                'religion' => $this->userProfile->globalParameterReligion->name ?? null,
+            ],
+            'created_by' => [
+                'id' => $this->globalParameterTypeCreated->id ?? null,
             ],
         ];
     }

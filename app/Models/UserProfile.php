@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserProfile extends Model
 {
@@ -12,8 +13,21 @@ class UserProfile extends Model
     protected $table = "users_profile";
     protected $guarded = [];
 
-    public function user_profile()
+    public function user() :BelongsTo
     {
         return $this->belongsTo(User::class, 'id');
+    }
+
+    public function globalParameterGender() :BelongsTo
+    {
+        return $this->belongsTo(GlobalParameter::class, 'gender');
+    }
+    public function globalParameterCivilStatus() :BelongsTo
+    {
+        return $this->belongsTo(GlobalParameter::class, 'civil_status');
+    }
+    public function globalParameterReligion() :BelongsTo
+    {
+        return $this->belongsTo(GlobalParameter::class, 'religion');
     }
 }

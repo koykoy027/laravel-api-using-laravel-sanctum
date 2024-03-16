@@ -18,13 +18,8 @@ class GlobalParameterType extends Model
         return $this->hasMany(GlobalParameter::class, 'id');
     }
 
-    public function createdByUser() :HasOne
+    public function createdBy()
     {
         return $this->hasOne(User::class, 'created_by', 'id');
-    }
-
-    public function updatedByUser() :HasOne
-    {
-        return $this->hasOne(User::class, 'updated_by', 'id');
     }
 }
