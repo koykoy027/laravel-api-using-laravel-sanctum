@@ -39,8 +39,20 @@ class AuthenticationController extends Controller
 
     public function register(RegisterRequest $request)
     {
+        $user = User::create([
+            'created_by' => Auth::user()->id,
+            'updated_by' => Auth::user()->id,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
 
-        $user = User::registerUser($request);
+        UserProfile::create([
+            'id' => $user->id,
+            'firstname' => $request->firstname,
+            'middlename' => $request->middlename,
+            'lastname' => $request->lastname,
+            'gender' => $request->gender,
+        ]);
 
         return $this->success([
             'user' => $user,

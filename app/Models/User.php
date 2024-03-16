@@ -35,27 +35,7 @@ class User extends Authenticatable
     public static function activeUsers()
     {
         $users = self::where('is_active', self::ACTIVE);
-
         return $users;
-    }
-
-    public static function registerUser(RegisterRequest $request)
-    {
-        $user = self::create([
-            'created_by' => Auth::user()->id,
-            'updated_by' => Auth::user()->id,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        UserProfile::create([
-            'id' => $user->id,
-            'firstname' => $request->firstname,
-            'middlename' => $request->middlename,
-            'lastname' => $request->lastname,
-            'gender' => $request->gender,
-        ]);
-        return $user;
     }
 
     public function user_profile()

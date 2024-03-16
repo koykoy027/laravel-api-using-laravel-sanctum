@@ -5,26 +5,18 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function index()
     {
-        return [
-            User::activeUsers()
-            ->with('students')
-            ->get(),
-        ];
+        return UserResource::collection(
+            User::activeUsers()->get()
+        );
     }
 
-    public function show($id)
+    public function show(User $user)
     {
-
-        return [
-            User::activeUsers()
-                ->orWhere('id', $id)
-                ->first(),
-        ];
+        return new UserResource($user);
     }
 }

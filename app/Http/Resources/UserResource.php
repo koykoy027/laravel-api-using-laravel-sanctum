@@ -21,10 +21,6 @@ class UserResource extends JsonResource
                 'middlename' => $this->user_profile->middlename,
                 'lastname' => $this->user_profile->lastname,
             ],
-            'created' => [
-                StudentResource::collection($this->students),
-                // 'id' => $this->students,
-            ]
         ];
     }
 }
