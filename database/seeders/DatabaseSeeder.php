@@ -18,5 +18,11 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(10)->create();
         UserProfile::factory(10)->create();
+
+        $this->call([
+            GlobalParameterTypeSeeder::class,
+            GlobalParameterSeeder::class,
+
+        ]);
     }
 }
