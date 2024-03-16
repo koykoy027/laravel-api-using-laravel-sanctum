@@ -10,6 +10,7 @@ use App\Models\UserProfile;
 use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AuthenticationController extends Controller
@@ -39,20 +40,27 @@ class AuthenticationController extends Controller
 
     public function register(RegisterRequest $request)
     {
-        $user = User::create([
-            'created_by' => Auth::user()->id,
-            'updated_by' => Auth::user()->id,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        try {
+            DB::beginTransaction();
+            $user = User::create([
+                'created_by' => Auth::user()->id,
+                'updated_by' => Auth::user()->id,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
 
-        UserProfile::create([
-            'id' => $user->id,
-            'firstname' => $request->firstname,
-            'middlename' => $request->middlename,
-            'lastname' => $request->lastname,
-            'gender' => $request->gender,
-        ]);
+            UserProfile::create([
+                'id' => $user->id,
+                'firstname' => $request->firstname,
+                'middlename' => $request->middlename,
+                'lastname' => $request->lastname,
+                'gender' => $request->gender,
+            ]);
+            DB::commit();
+        } catch (\Exception $error) {
+            DB::rollBack();
+            return $error;
+        }
 
         return $this->success([
             'user' => $user,

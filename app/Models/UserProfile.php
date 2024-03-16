@@ -10,13 +10,7 @@ class UserProfile extends Model
     use HasFactory;
 
     protected $table = "user_profiles";
-    protected $fillable = [
-        'id',
-        'firstname',
-        'middlename',
-        'lastname',
-        'gender',
-    ];
+    protected $guarded = [];
 
     public function user_profile()
     {

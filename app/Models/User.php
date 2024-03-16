@@ -8,8 +8,6 @@ use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -22,12 +20,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $table = 'users';
-    protected $fillable = [
-        'email',
-        'password',
-        'created_by',
-        'updated_by',
-    ];
+    protected $guarded = [];
 
     const ACTIVE = 1;
     const INACTIVE = 0;
@@ -41,11 +34,6 @@ class User extends Authenticatable
     public function user_profile()
     {
         return $this->hasOne(UserProfile::class, 'id');
-    }
-
-    public function students()
-    {
-        return $this->hasMany(Student::class, 'created_by');
     }
 
     /**

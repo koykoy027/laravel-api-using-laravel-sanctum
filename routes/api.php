@@ -13,11 +13,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // token required
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::controller(StudentController::class)->group(function () {
-        Route::get('/students', 'index');
-        Route::get('/students/{id}', 'show');
-        Route::post('/students', 'store');
-    });
 
     Route::controller(UserController::class)->group(function () {
         Route::get('/users', 'index');
