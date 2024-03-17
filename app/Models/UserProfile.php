@@ -17,7 +17,6 @@ class UserProfile extends Model
     {
         return $this->belongsTo(User::class, 'id');
     }
-
     public function globalParameterGender() :BelongsTo
     {
         return $this->belongsTo(GlobalParameter::class, 'gender');
