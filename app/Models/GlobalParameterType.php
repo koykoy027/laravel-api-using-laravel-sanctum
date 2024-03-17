@@ -13,13 +13,18 @@ class GlobalParameterType extends Model
     protected $table = 'global_parameters_type';
     protected $guarded = [];
 
-    public function globalParameter() :HasMany
+    public function globalParameters(): HasMany
     {
         return $this->hasMany(GlobalParameter::class, 'id');
     }
 
-    public function createdByUser()
+    public function createdBy()
     {
-        return $this->hasOne(UserProfile::class, 'created_by', 'id');
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by', 'id');
     }
 }

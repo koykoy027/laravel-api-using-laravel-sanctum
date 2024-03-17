@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class GlobalParameterTypeResource extends JsonResource
+class GlobalParameterResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,6 +17,7 @@ class GlobalParameterTypeResource extends JsonResource
         return [
             'data' => [
                 'id' => $this->id ?? null,
+                'type' => $this->globalParameterType->name ?? null,
                 'name' => $this->name ?? null,
                 'description' => $this->description ?? null,
                 'is_active' => $this->is_active ?? null,

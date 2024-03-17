@@ -4,8 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class GlobalParameter extends Model
 {
@@ -13,13 +12,19 @@ class GlobalParameter extends Model
     protected $table = 'global_parameters';
     protected $guarded = [];
 
-    public function globalParameterType() :HasOne
+    public function globalParameterType(): BelongsTo
     {
-        return $this->hasOne(GlobalParameterType::class, 'type', 'id');
+        return $this->belongsTo(GlobalParameterType::class, 'type', 'id');
     }
 
-    // public function createdBy()
-    // {
-    //     return $this->hasOne(User::class, 'created_by');
-    // }
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by', 'id');
+    }
+
 }

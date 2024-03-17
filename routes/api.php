@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthenticationController;
+use App\Http\Controllers\Api\GlobalParameter\GlobalParameterController;
 use App\Http\Controllers\Api\GlobalParameter\GlobalParameterTypeController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\StudentController;
@@ -23,6 +24,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 // token not required
 Route::controller(GlobalParameterTypeController::class)->group(function () {
+    Route::get('/global parameter type', 'index');
+});
+
+Route::controller(GlobalParameterController::class)->group(function () {
     Route::get('/global parameter', 'index');
 });
 
