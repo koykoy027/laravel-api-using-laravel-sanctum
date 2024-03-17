@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
+// authenticated
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -18,6 +19,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::controller(UserController::class)->group(function () {
         Route::get('/users', 'index');
         Route::get('/users/{user}', 'show');
+        Route::patch('/users/{userProfile}', 'update');
     });
 });
 
