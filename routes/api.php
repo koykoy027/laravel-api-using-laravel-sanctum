@@ -1,10 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\Auth\AuthenticationController;
-use App\Http\Controllers\Api\GlobalParameter\GlobalParameterController;
-use App\Http\Controllers\Api\GlobalParameter\GlobalParameterTypeController;
-use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\StudentController;
+use App\Http\Controllers\Auth\AuthenticationController;
+use App\Http\Controllers\GlobalParameter\GlobalParameterController;
+use App\Http\Controllers\GlobalParameter\GlobalParameterTypeController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

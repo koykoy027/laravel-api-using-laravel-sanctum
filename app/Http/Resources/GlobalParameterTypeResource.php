@@ -15,19 +15,16 @@ class GlobalParameterTypeResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'data' => [
-                'id' => $this->id ?? null,
-                'name' => $this->name ?? null,
-                'description' => $this->description ?? null,
-                'is_active' => $this->is_active ?? null,
-            ],
+            'id' => (string)$this->id,
+            'name' => $this->name ?? null,
+            'description' => $this->description ?? null,
+            'is_active' => $this->is_active ?? null,
             'created_by' => [
                 'id' => $this->createdBy->userProfile->id ?? null,
                 'firstname' => $this->createdBy->userProfile->firstname ?? null,
                 'middlename' => $this->createdBy->userProfile->middlename ?? null,
                 'lastname' => $this->createdBy->userProfile->lastname ?? null,
             ],
-
             'updated_by' => [
                 'id' => $this->updatedBy->userProfile->id ?? null,
                 'firstname' => $this->updatedBy->userProfile->firstname ?? null,

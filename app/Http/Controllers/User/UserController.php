@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
@@ -10,9 +10,14 @@ class UserController extends Controller
 {
     public function index()
     {
-        return UserResource::collection(
-            User::allActive()->get()
+        $data = UserResource::collection(
+            User::allActive()
+                ->get()
         );
+
+        return response()->json([
+            'data' => $data,
+        ]);
     }
 
     public function show(User $user)
