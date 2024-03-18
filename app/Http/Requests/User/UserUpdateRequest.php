@@ -3,6 +3,7 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UserUpdateRequest extends FormRequest
 {
@@ -22,13 +23,21 @@ class UserUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'email' => ['required'],
-            'firstname' => ['required'],
-            'middlename' => ['required'],
-            'lastname' => ['required'],
-            'gender' => ['required'],
-            'civil_status' => ['required'],
-            'religion' => ['required'],
+            'email' => [
+                'sometimes',
+                'required',
+                'string',
+                'email',
+                'max:255',
+                'unique:users,email,except,id'
+            ],
+            
+            'firstname' => ['sometimes', 'required', 'string', 'max:255'],
+            'middlename' => ['sometimes', 'required', 'string', 'max:255'],
+            'lastname' => ['sometimes', 'required', 'string', 'max:255'],
+            'gender' => ['sometimes', 'required', 'integer', 'max:255'],
+            'civil_status' => ['sometimes', 'required', 'integer', 'max:255'],
+            'religion' => ['sometimes', 'required', 'integer', 'max:255'],
         ];
     }
 }

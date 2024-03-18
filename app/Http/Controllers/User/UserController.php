@@ -6,11 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserUpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use App\Models\UserProfile;
-use Illuminate\Http\Request;
+use App\Traits\CreatedByAndUpdatedBy;
+use App\Traits\HttpResponses;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+
+    use CreatedByAndUpdatedBy;
+
     public function index()
     {
         $data = UserResource::collection(
@@ -28,21 +32,27 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-    public function update(Request $request, User $user, UserProfile $userProfile)
+    public function update(UserUpdateRequest $request, $id)
     {
-        $user->update([
-            'email' => $request->email,
-        ]);
-        
-        $userProfile->update([
-            'firstname' => $request->firstname,
-            'middlename' => $request->middlename,
-            'lastname' => $request->lastname,
-            'gender' => $request->gender,
-            'civil_status' => $request->civil_status,
-            'religion' => $request->religion,
-        ]);
+        try {
+            DB::beginTransaction();
 
-        return new UserResource($user);
+            $user = User::find($id);
+            $user->update(
+                array_merge(
+                    $request->only(['email']),
+                    $this->updatedBy()
+                )
+            );
+
+            $user->userProfile->update($request->except(['email']));
+
+            DB::commit();
+
+            return new UserResource(User::find($id));
+        } catch (\Exception $error) {
+            DB::rollBack();
+            return $error;
+        }
     }
 }

@@ -4,13 +4,15 @@ use App\Http\Controllers\Auth\AuthenticationController;
 use App\Http\Controllers\GlobalParameter\GlobalParameterController;
 use App\Http\Controllers\GlobalParameter\GlobalParameterTypeController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
 // authenticated
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    return new UserResource(Auth::user());
 });
 
 // token required
@@ -19,8 +21,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::controller(UserController::class)->group(function () {
         Route::get('/users', 'index');
         Route::get('/users/{user}', 'show');
-        Route::patch('/users/{userProfile}', 'update');
+        Route::patch('/users/{id}', 'update');
     });
+    
 });
 
 // token not required

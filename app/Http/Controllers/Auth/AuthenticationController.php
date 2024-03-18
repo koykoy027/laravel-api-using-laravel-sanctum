@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use App\Models\UserProfile;
+use App\Traits\CreatedByAndUpdatedBy;
 use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 class AuthenticationController extends Controller
 {
     use HttpResponses;
+    use CreatedByAndUpdatedBy;
 
     public function login(LoginRequest $request)
     {
@@ -44,11 +46,10 @@ class AuthenticationController extends Controller
 
             
             $user = User::create([
-                'created_by' => Auth::user()->id,
-                'updated_by' => Auth::user()->id,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-            ]);
+            ] + $this->createdByAndUpdatedBy());
+            
 
             UserProfile::create([
                 'id' => $user->id,
