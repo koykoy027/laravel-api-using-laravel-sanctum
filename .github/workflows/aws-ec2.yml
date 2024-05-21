@@ -1,0 +1,30 @@
+name: AWS EC2 CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  laravel:
+    name: Continuous Integration
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Composer dependencies
+        run: sudo composer install --no-interaction --optimize-autoloader
+
+      - name: Deploy to EC2
+        run: |
+            sudo mkdir -p /var/www/html/aqua-lab-ph/ 
+            sudo cp -r * /var/www/html/aqua-lab-ph/
+
+      - name: Give permission
+        run: |
+          sudo chown -R www-data:www-data /var/www/html/aqua-lab-ph
+          sudo chmod -R 775 /var/www/html/aqua-lab-ph
+          sudo chmod -R 775 /var/www/html/aqua-lab-ph/storage
+          sudo chmod -R 775 /var/www/html/aqua-lab-ph/bootstrap/cache
