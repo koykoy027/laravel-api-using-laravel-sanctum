@@ -16,42 +16,56 @@ class GlobalParameterSeeder extends Seeder
         // Gender 
         GlobalParameter::create([
             'type' => 1,
+            'code' => 1,
             'name' => 'Male',
         ]);
         GlobalParameter::create([
             'type' => 1,
+            'code' => 2,
             'name' => 'Female',
         ]);
 
         // Civil Status
         GlobalParameter::create([
             'type' => 2,
+            'code' => 1,
             'name' => 'Single',
         ]);
         GlobalParameter::create([
             'type' => 2,
+            'code' => 2,
             'name' => 'Married',
         ]);
         GlobalParameter::create([
             'type' => 2,
+            'code' => 3,
             'name' => 'Divorce',
         ]);
         GlobalParameter::create([
             'type' => 2,
+            'code' => 4,
             'name' => 'Widowed',
+        ]);
+        GlobalParameter::create([
+            'type' => 2,
+            'code' => 5,
+            'name' => 'Seperated',
         ]);
 
         // Religion
         GlobalParameter::create([
             'type' => 3,
+            'code' => 1,
             'name' => 'Roman Catholic',
         ]);
         GlobalParameter::create([
             'type' => 3,
+            'code' => 2,
             'name' => 'Muslim',
         ]);
         GlobalParameter::create([
             'type' => 3,
+            'code' => 3,
             'name' => 'Iglesia ni Cristo',
         ]);
     }

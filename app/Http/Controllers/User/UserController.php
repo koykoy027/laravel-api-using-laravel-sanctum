@@ -8,28 +8,33 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Models\UserProfile;
 use App\Traits\CreatedByAndUpdatedBy;
+use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
 
-    use CreatedByAndUpdatedBy;
+    use HttpResponses, CreatedByAndUpdatedBy;
 
     public function index()
     {
-        $data = UserResource::collection(
+        $users = UserResource::collection(
             UserProfile::allActive()
                 ->get()
         );
 
-        return response()->json([
-            'data' => $data,
+        return $this->success([
+            'users' => $users,
         ]);
     }
 
     public function show($id)
     {
-        return new UserResource(UserProfile::find($id));
+        $user =  new UserResource(UserProfile::find($id));
+
+        return $this->success([
+            'user' => $user,
+        ]);
     }
 
     public function update(UserUpdateRequest $request, $id)
@@ -37,22 +42,29 @@ class UserController extends Controller
         try {
             DB::beginTransaction();
 
-            $user = User::find($id);
-            $user->update(
-                array_merge(
-                    $request->only(['email']),
-                    $this->updated_by()
-                )
-            );
-
-            $user->userProfile->update($request->except(['email']));
-
+            $user = UserProfile::find($id);
+            $user->update([
+                'suffix' => $request->suffix,
+                'firstname' => $request->firstname,
+                'middlename' => $request->middlename,
+                'lastname' => $request->lastname,
+                'gender' => $request->gender,
+                'civil_status' => $request->civil_status,
+                'religion' => $request->religion,
+                'is_active' => $request->is_active,
+                'job_description' => $request->job_description,
+                'birthday' => $request->birthday,
+            ] + $this->updated_by());
+            
             DB::commit();
 
-            return new UserResource(User::find($id));
+            return $this->success([
+                'user' => $user,
+            ]);
+
         } catch (\Exception $error) {
             DB::rollBack();
-            return $error;
+            return $this->error('', $error->getMessage(), 400);
         }
     }
 }

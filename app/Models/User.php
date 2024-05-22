@@ -26,7 +26,7 @@ class User extends Authenticatable
     protected $table = 'users';
     protected $guarded = [];
 
-    public function userProfile(): HasOne
+    public function user_profile(): HasOne
     {
         return $this->hasOne(UserProfile::class, 'id');
     }

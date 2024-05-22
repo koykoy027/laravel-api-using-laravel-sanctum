@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('global_parameters', function (Blueprint $table) {
             $table->id();
             $table->foreignId('type')->nullable()->constrained('global_parameters_type')->onUpdate('cascade');
+            $table->integer('code')->nullable();
             $table->string('name')->nullable();
             $table->longText('description')->nullable();
             $table->boolean('is_active')->default(true);

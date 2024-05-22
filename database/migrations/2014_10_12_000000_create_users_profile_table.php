@@ -18,10 +18,12 @@ return new class extends Migration
             $table->string('firstname')->nullable();
             $table->string('middlename')->nullable();
             $table->string('lastname')->nullable();
+            $table->string('birthday')->nullable();
             $table->integer('gender')->nullable()->comment('global_parameters id');
             $table->integer('civil_status')->nullable()->comment('global_parameters id');
             $table->integer('religion')->nullable()->comment('global_parameters id');
-
+            $table->longText('job_description')->nullable();
+            
             // account information
             $table->string('role')->nullable();
             $table->boolean('is_admin');

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 trait CreatedByAndUpdatedBy
 {
 
-    private function createdByAndUpdatedBy()
+    private function created_by_and_updated_by()
     {
         return [
             'created_by' => Auth::user()->id,
