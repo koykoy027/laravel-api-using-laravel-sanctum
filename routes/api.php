@@ -34,8 +34,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 Route::controller(GlobalParameterTypeController::class)->group(function () {
     Route::get('/global parameter type', 'index');
+    Route::get('/global parameter type/{id}', 'show');
     Route::post('/global parameter type', 'store')->middleware('auth:sanctum');
-    // Route::patch('/global parameter type/{id}', 'update');
+    Route::patch('/global parameter type/{id}', 'update')->middleware('auth:sanctum');
 });
 
 Route::controller(GlobalParameterController::class)->group(function () {

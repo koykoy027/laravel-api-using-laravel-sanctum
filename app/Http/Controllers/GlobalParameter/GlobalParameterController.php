@@ -50,6 +50,7 @@ class GlobalParameterController extends Controller
                 'description' => $request->description,
                 'is_active' => $request->is_active,
             ] + $this->updated_by());
+            $global_parameter = new GlobalParameterResource($global_parameter);
 
             DB::commit();
             return $this->success([

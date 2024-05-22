@@ -19,9 +19,6 @@ class GlobalParameterTypeResource extends JsonResource
             'name' => $this->name ?? null,
             'description' => $this->description ?? null,
             'is_active' => $this->is_active ?? null,
-
-            'global_parameter' => GlobalParameterResource::collection($this->global_parameters),
-
             'created_by' => [
                 'id' => $this->created_by_user_profile->id ?? null,
                 'firstname' => $this->created_by_user_profile->firstname ?? null,
@@ -34,6 +31,9 @@ class GlobalParameterTypeResource extends JsonResource
                 'middlename' => $this->updated_by_user_profile->middlename ?? null,
                 'lastname' => $this->updated_by_user_profile->lastname ?? null,
             ],
+            
+            'global_parameter' => GlobalParameterResource::collection($this->global_parameters),
+
         ];
     }
 }
