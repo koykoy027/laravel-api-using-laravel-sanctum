@@ -15,12 +15,12 @@ trait CreatedByAndUpdatedBy
         ];
     }
 
-    private function createdBy()
+    private function created_by()
     {
         return ['created_by' => Auth::user()->id];
     }
 
-    private function updatedBy()
+    private function updated_by()
     {
         return ['updated_by' => Auth::user()->id];
     }

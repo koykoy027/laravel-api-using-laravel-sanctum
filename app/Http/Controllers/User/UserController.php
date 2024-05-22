@@ -41,7 +41,7 @@ class UserController extends Controller
             $user->update(
                 array_merge(
                     $request->only(['email']),
-                    $this->updatedBy()
+                    $this->updated_by()
                 )
             );
 

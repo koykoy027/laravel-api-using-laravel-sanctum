@@ -20,16 +20,16 @@ class GlobalParameterTypeResource extends JsonResource
             'description' => $this->description ?? null,
             'is_active' => $this->is_active ?? null,
             'created_by' => [
-                'id' => $this->createdBy->userProfile->id ?? null,
-                'firstname' => $this->createdBy->userProfile->firstname ?? null,
-                'middlename' => $this->createdBy->userProfile->middlename ?? null,
-                'lastname' => $this->createdBy->userProfile->lastname ?? null,
+                'id' => $this->created_by_user_profile->id ?? null,
+                'firstname' => $this->created_by_user_profile->firstname ?? null,
+                'middlename' => $this->created_by_user_profile->middlename ?? null,
+                'lastname' => $this->created_by_user_profile->lastname ?? null,
             ],
             'updated_by' => [
-                'id' => $this->updatedBy->userProfile->id ?? null,
-                'firstname' => $this->updatedBy->userProfile->firstname ?? null,
-                'middlename' => $this->updatedBy->userProfile->middlename ?? null,
-                'lastname' => $this->updatedBy->userProfile->lastname ?? null,
+                'id' => $this->updated_by_user_profile->id ?? null,
+                'firstname' => $this->updated_by_user_profile->firstname ?? null,
+                'middlename' => $this->updated_by_user_profile->middlename ?? null,
+                'lastname' => $this->updated_by_user_profile->lastname ?? null,
             ],
         ];
     }

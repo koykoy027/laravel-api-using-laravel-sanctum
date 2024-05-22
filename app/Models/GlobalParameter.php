@@ -17,12 +17,12 @@ class GlobalParameter extends Model
         return $this->belongsTo(GlobalParameterType::class, 'type', 'id');
     }
 
-    public function createdBy()
+    public function created_by_user_profile()
     {
         return $this->belongsTo(UserProfile::class, 'created_by', 'id');
     }
 
-    public function updatedBy()
+    public function updated_by_user_profile()
     {
         return $this->belongsTo(UserProfile::class, 'updated_by', 'id');
     }
