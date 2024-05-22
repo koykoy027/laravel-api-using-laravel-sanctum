@@ -16,7 +16,7 @@ class GlobalParameterResource extends JsonResource
     {
         return [
             'id' => (string)$this->id,
-            'type' => $this->globalParameterType->name ?? null,
+            'type' => $this->global_parameter_type->name ?? null,
             'name' => $this->name ?? null,
             'description' => $this->description ?? null,
             'is_active' => $this->is_active ?? null,

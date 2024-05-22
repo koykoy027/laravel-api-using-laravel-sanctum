@@ -12,17 +12,17 @@ class GlobalParameter extends Model
     protected $table = 'global_parameters';
     protected $guarded = [];
 
-    public function globalParameterType(): BelongsTo
+    public function global_parameter_type(): BelongsTo
     {
         return $this->belongsTo(GlobalParameterType::class, 'type', 'id');
     }
 
-    public function created_by_user_profile()
+    public function created_by_user_profile() :BelongsTo
     {
         return $this->belongsTo(UserProfile::class, 'created_by', 'id');
     }
 
-    public function updated_by_user_profile()
+    public function updated_by_user_profile() :BelongsTo
     {
         return $this->belongsTo(UserProfile::class, 'updated_by', 'id');
     }
