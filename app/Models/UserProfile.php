@@ -29,16 +29,31 @@ class UserProfile extends Model
         return $this->belongsTo(User::class, 'id');
     }
 
+    public function user_address() :HasMany
+    {
+        return $this->hasMany(UserAddress::class, 'users_profile', 'id');
+    }
+
     public function global_parameter_gender(): BelongsTo
     {
-        return $this->belongsTo(GlobalParameter::class, 'gender');
+        return $this->belongsTo(GlobalParameter::class, 'gender', 'code')
+            ->whereHas('global_parameter_type', function ($query) {
+                $query->where('id', 1);
+            });
     }
+
     public function global_parameter_civil_status(): BelongsTo
     {
-        return $this->belongsTo(GlobalParameter::class, 'civil_status');
+        return $this->belongsTo(GlobalParameter::class, 'civil_status', 'code')
+            ->whereHas('global_parameter_type', function ($query) {
+                $query->where('id', 2);
+            });
     }
     public function global_parameter_religion(): BelongsTo
     {
-        return $this->belongsTo(GlobalParameter::class, 'religion');
+        return $this->belongsTo(GlobalParameter::class, 'religion', 'code')
+            ->whereHas('global_parameter_type', function ($query) {
+                $query->where('id', 3);
+            });
     }
 }

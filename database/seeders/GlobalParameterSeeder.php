@@ -68,5 +68,12 @@ class GlobalParameterSeeder extends Seeder
             'code' => 3,
             'name' => 'Iglesia ni Cristo',
         ]);
+
+        // Address Information Type
+        GlobalParameter::create([
+            'type' => 4,
+            'code' => 1,
+            'name' => 'Home Address',
+        ]);
     }
 }

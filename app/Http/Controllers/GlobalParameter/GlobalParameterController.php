@@ -14,17 +14,6 @@ class GlobalParameterController extends Controller
 {
     use HttpResponses, CreatedByAndUpdatedBy;
 
-    public function index()
-    {
-        $global_parameter = GlobalParameterResource::collection(
-            GlobalParameter::all()
-        );
-
-        return $this->success([
-            'global_parameter' => $global_parameter,
-        ]);
-    }
-
     public function store(Request $request)
     {
         DB::beginTransaction();
@@ -37,6 +26,8 @@ class GlobalParameterController extends Controller
                 'description' => $request->description,
                 'code' => $code,
             ] +  $this->created_by_and_updated_by());
+
+            $global_parameter = new GlobalParameterResource($global_parameter);
 
             DB::commit();
             return $this->success([

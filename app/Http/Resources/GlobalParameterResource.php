@@ -15,8 +15,8 @@ class GlobalParameterResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => (string)$this->id,
-            'type' => $this->global_parameter_type->name ?? null,
+            'id' => $this->code,
+            // 'type' => $this->global_parameter_type->name ?? null,
             'name' => $this->name ?? null,
             'description' => $this->description ?? null,
             'is_active' => $this->is_active ?? null,

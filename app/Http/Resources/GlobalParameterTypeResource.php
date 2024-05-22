@@ -15,10 +15,13 @@ class GlobalParameterTypeResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => (string)$this->id,
+            'id' => $this->id,
             'name' => $this->name ?? null,
             'description' => $this->description ?? null,
             'is_active' => $this->is_active ?? null,
+
+            'global_parameter' => GlobalParameterResource::collection($this->global_parameters),
+
             'created_by' => [
                 'id' => $this->created_by_user_profile->id ?? null,
                 'firstname' => $this->created_by_user_profile->firstname ?? null,

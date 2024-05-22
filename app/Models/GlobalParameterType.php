@@ -15,7 +15,7 @@ class GlobalParameterType extends Model
 
     public function global_parameters(): HasMany
     {
-        return $this->hasMany(GlobalParameter::class, 'id');
+        return $this->hasMany(GlobalParameter::class, 'type');
     }
 
     public function created_by_user_profile() :BelongsTo

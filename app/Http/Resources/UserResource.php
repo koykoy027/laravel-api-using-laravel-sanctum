@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -14,9 +15,10 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        
         return [
 
-            'id' => (string)$this->id,
+            'id' => $this->id,
             'email' => $this->user->email ?? null,
             'suffix' => $this->suffix ?? null,
             'firstname' => $this->firstname ?? null,
@@ -26,10 +28,14 @@ class UserResource extends JsonResource
             'civil_status' => $this->global_parameter_civil_status->name ?? null,
             'religion' => $this->global_parameter_religion->name ?? null,
             'role' => $this->role ?? null,
+            'job_description' => $this->job_description ?? null,
             'is_admin' => $this->is_admin ?? null,
             'is_required_to_change_password' => $this->is_required_to_change_password ?? null,
             'is_otp_enabled' => $this->is_otp_enabled ?? null,
             'is_active' => $this->is_active ?? null,
+            'addresses' => UserAddressResource::collection($this->user_address),
+
+            
         ];
     }
 }

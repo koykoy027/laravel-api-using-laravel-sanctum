@@ -24,7 +24,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/users', 'index');
         Route::get('/users/{id}', 'show');
         Route::patch('/users/{id}', 'update');
-    });
+    });    
     
 });
 
@@ -34,10 +34,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 Route::controller(GlobalParameterTypeController::class)->group(function () {
     Route::get('/global parameter type', 'index');
+    Route::post('/global parameter type', 'store')->middleware('auth:sanctum');
+    // Route::patch('/global parameter type/{id}', 'update');
 });
 
 Route::controller(GlobalParameterController::class)->group(function () {
-    Route::get('/global parameter', 'index');
     Route::post('/global parameter', 'store')->middleware('auth:sanctum');
     Route::patch('/global parameter/{id}', 'update')->middleware('auth:sanctum');
 });

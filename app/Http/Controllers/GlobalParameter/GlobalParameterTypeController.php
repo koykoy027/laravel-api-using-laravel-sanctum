@@ -5,11 +5,14 @@ namespace App\Http\Controllers\GlobalParameter;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\GlobalParameterTypeResource;
 use App\Models\GlobalParameterType;
+use App\Traits\CreatedByAndUpdatedBy;
 use App\Traits\HttpResponses;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GlobalParameterTypeController extends Controller
 {
-    use HttpResponses;
+    use HttpResponses, CreatedByAndUpdatedBy;
     public function index()
     {
         $global_parameter_type = GlobalParameterTypeResource::collection(
@@ -19,5 +22,29 @@ class GlobalParameterTypeController extends Controller
         return $this->success([
             'global_parameter_type' => $global_parameter_type
         ]);
+    }
+
+    public function store(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+
+            $global_parameter_type = GlobalParameterType::create([
+                'name' => $request->name,
+                'description' => $request->description,
+            ] + $this->created_by_and_updated_by());
+
+            DB::commit();
+            return $this->success([
+                'global_parameter_type' => $global_parameter_type,
+            ]);
+
+        } catch (\Exception $error) {
+
+            DB::rollBack();
+            return $this->error('', $error->getMessage(), 500);
+            
+        }
     }
 }

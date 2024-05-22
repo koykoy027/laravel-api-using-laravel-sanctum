@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ApiPhilippinesBarangay extends Model
 {
     use HasFactory;
-    protected $table = 'api_philippines_barangay';
+    protected $table = 'api_philippines_barangays';
     protected $guarded = [];
 }

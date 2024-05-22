@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Models\UserProfile;
 use App\Traits\CreatedByAndUpdatedBy;
@@ -65,11 +66,12 @@ class AuthenticationController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
+            $user_profile = new UserResource($user_profile);
+
             DB::commit();
 
             return $this->success([
-                'user' => $user_profile,
-                // 'token' => $user_profile->createToken('API Token of ' . $user_profile->name)->plainTextToken,
+                'user_profile' => $user_profile,
             ]);
 
 

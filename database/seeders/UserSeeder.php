@@ -39,7 +39,8 @@ class UserSeeder extends Seeder
         ]);
 
         UserAddress::create([
-            'id' => $userProfile->id,
+            'users_profile' => $userProfile->id,
+            'type' => '1',
             'region' => '03',
             'province' => '0314',
             'city' => '031420',

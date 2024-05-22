@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users_addressess', function (Blueprint $table) {
-            $table->foreignId('id')->primary()->constrained('users_profile')->onUpdate('cascade');
-            $table->string('region')->nullable()->comment('api_philippines_regions id');
-            $table->string('province')->nullable()->comment('api_philippines_provinces id');
-            $table->string('city')->nullable()->comment('api_philippines_cities id');
-            $table->string('barangay')->nullable()->comment('api_philippines_barangays id');
+            $table->id();
+            $table->foreignId('users_profile')->constrained('users_profile');
+            $table->integer('type')->nullable()->comment('global_parameters id=4');
+            $table->string('region')->nullable()->comment('api_philippines_regions region_code');
+            $table->string('province')->nullable()->comment('api_philippines_provinces province_code');
+            $table->string('city')->nullable()->comment('api_philippines_cities city_code');
+            $table->string('barangay')->nullable()->comment('api_philippines_barangays barangay_code');
             $table->string('address')->nullable();
             $table->string('zip_code')->nullable();
             $table->timestamps();

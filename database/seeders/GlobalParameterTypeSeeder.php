@@ -22,5 +22,8 @@ class GlobalParameterTypeSeeder extends Seeder
         GlobalParameterType::create([
             'name' => 'Religion',
         ]);
+        GlobalParameterType::create([
+            'name' => 'Address Information Type',
+        ]);
     }
 }

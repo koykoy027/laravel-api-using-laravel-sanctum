@@ -40,6 +40,7 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, $id)
     {
         try {
+            
             DB::beginTransaction();
 
             $user = UserProfile::find($id);
@@ -55,6 +56,8 @@ class UserController extends Controller
                 'job_description' => $request->job_description,
                 'birthday' => $request->birthday,
             ] + $this->updated_by());
+
+            $user = new UserResource($user);
             
             DB::commit();
 
@@ -64,7 +67,7 @@ class UserController extends Controller
 
         } catch (\Exception $error) {
             DB::rollBack();
-            return $this->error('', $error->getMessage(), 400);
+            return $this->error('', $error->getMessage(), 500);
         }
     }
 }
