@@ -18,12 +18,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // token required
 Route::middleware(['auth:sanctum'])->group(function () {
 
-    Route::controller(UserController::class)->group(function () {
-        Route::get('/users', 'index');
-        Route::get('/users/{user}', 'show');
-        Route::patch('/users/{id}', 'update');
-    });
     
+    
+});
+
+Route::controller(UserController::class)->group(function () {
+    Route::get('/users', 'index');
+    Route::get('/users/{id}', 'show');
+    Route::patch('/users/{id}', 'update');
 });
 
 // token not required

@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserUpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Models\UserProfile;
 use App\Traits\CreatedByAndUpdatedBy;
-use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         $data = UserResource::collection(
-            User::allActive()
+            UserProfile::allActive()
                 ->get()
         );
 
@@ -27,9 +27,9 @@ class UserController extends Controller
         ]);
     }
 
-    public function show(User $user)
+    public function show($id)
     {
-        return new UserResource($user);
+        return new UserResource(UserProfile::find($id));
     }
 
     public function update(UserUpdateRequest $request, $id)

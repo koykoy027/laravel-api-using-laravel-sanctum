@@ -26,16 +26,7 @@ class User extends Authenticatable
     protected $table = 'users';
     protected $guarded = [];
 
-    const ACTIVE = 1;
-    const INACTIVE = 0;
-
-    public static function allActive()
-    {
-        $users = self::where('is_active', self::ACTIVE);
-        return $users;
-    }
-
-    public function userProfile() :HasOne
+    public function userProfile(): HasOne
     {
         return $this->hasOne(UserProfile::class, 'id');
     }

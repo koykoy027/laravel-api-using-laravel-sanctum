@@ -28,6 +28,13 @@ class UserProfileFactory extends Factory
             'gender' => fake()->numberBetween(1, 2),
             'civil_status' => fake()->numberBetween(3, 6),
             'religion' => fake()->numberBetween(7, 9),
+            'is_admin' => fake()->numberBetween(0, 1),
+            'is_required_to_change_password' => fake()->numberBetween(0, 1),
+            'is_otp_enabled' => fake()->numberBetween(0, 1),
+            'is_active' => fake()->numberBetween(0, 1),
+            'email_verified_at' => now(),
+            'created_by' => fake()->numberBetween(1, 10),
+            'updated_by' => fake()->numberBetween(1, 10),
         ];
     }
 }

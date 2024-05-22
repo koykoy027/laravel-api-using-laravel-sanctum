@@ -13,15 +13,12 @@ return new class extends Migration
     {
         Schema::create('global_parameters', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('type')
-                ->nullable()
-                ->constrained('global_parameters_type')
-                ->onUpdate('cascade');
+            $table->foreignId('type')->nullable()->constrained('global_parameters_type')->onUpdate('cascade');
             $table->string('name')->nullable();
             $table->longText('description')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->foreignId('created_by')->nullable()->constrained('users');
-            $table->foreignId('updated_by')->nullable()->constrained('users');
+            $table->integer('created_by')->nullable()->comment('users_profile id');
+            $table->integer('updated_by')->nullable()->comment('users_profile id');
             $table->timestamps();
         });
     }

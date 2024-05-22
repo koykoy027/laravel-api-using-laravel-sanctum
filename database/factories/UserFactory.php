@@ -16,15 +16,15 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    private static $id = 1;
+
     public function definition(): array
     {
         return [
+            'id' => self::$id++,
             'email' => fake()->unique()->safeEmail(),
             'password' => 'Pa$$w0rd!',
-            'email_verified_at' => now(),
             'remember_token' => Str::random(10),
-            'created_by' => fake()->numberBetween(1, 10),
-            'updated_by' => fake()->numberBetween(1, 10),
         ];
     }
 

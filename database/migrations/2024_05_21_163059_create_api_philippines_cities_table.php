@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('global_parameters_type', function (Blueprint $table) {
+        Schema::create('api_philippines_cities', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->longText('description')->nullable();
-            $table->boolean('is_active')->default(true);
+            $table->string('psgc_code')->nullable();
+            $table->string('city_name')->nullable();
+            $table->string('region_code')->nullable();
+            $table->string('province_code')->nullable();
+            $table->string('city_code')->nullable();
+            $table->string('district')->nullable();
             $table->integer('created_by')->nullable()->comment('users_profile id');
             $table->integer('updated_by')->nullable()->comment('users_profile id');
             $table->timestamps();
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('global_parameters_type');
+        Schema::dropIfExists('api_philippines_cities');
     }
 };
