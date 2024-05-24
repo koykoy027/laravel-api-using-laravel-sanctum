@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Resources\UserResource;
+use App\Mail\OTPLogin;
 use App\Models\User;
 use App\Models\UserProfile;
 use App\Traits\CreatedByAndUpdatedBy;
@@ -13,6 +14,7 @@ use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AuthenticationController extends Controller
 {
@@ -32,6 +34,12 @@ class AuthenticationController extends Controller
             Auth::logout();
             return $this->error('', 'User is not active', 401);
         }
+
+        $email = $user->email;
+        $firstname = $user->user_profile->firstname;
+        $otp = '123456';
+        
+        Mail::to($email)->send(new OTPLogin($otp, $firstname));
 
         return $this->success([
             'user' => $user,
