@@ -34,6 +34,11 @@ class UserProfile extends Model
         return $this->hasMany(UserAddress::class, 'users_profile', 'id');
     }
 
+    public function user_otp() :HasMany
+    {
+        return $this->hasMany(UserOTP::class, 'users_profile', 'id');
+    }
+
     public function global_parameter_gender(): BelongsTo
     {
         return $this->belongsTo(GlobalParameter::class, 'gender', 'code')

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->longText('description')->nullable();
             $table->boolean('is_active')->default(true);
+            $table->boolean('is_show')->nullable()->comment('0 = will not show in library, 1 = show in library,');
             $table->integer('created_by')->nullable()->comment('users_profile id');
             $table->integer('updated_by')->nullable()->comment('users_profile id');
             $table->timestamps();

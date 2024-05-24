@@ -8,9 +8,11 @@ use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Mail\OTPLogin;
 use App\Models\User;
+use App\Models\UserOTP;
 use App\Models\UserProfile;
 use App\Traits\CreatedByAndUpdatedBy;
 use App\Traits\HttpResponses;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -29,17 +31,23 @@ class AuthenticationController extends Controller
         }
 
         $user = User::where('email', $request->email)->first();
-
-        if (!$user || !$user->user_profile->is_active) {
+        
+        if (!$user->user_profile->is_active) {
             Auth::logout();
             return $this->error('', 'User is not active', 401);
         }
 
-        $email = $user->email;
-        $firstname = $user->user_profile->firstname;
-        $otp = '123456';
-        
-        Mail::to($email)->send(new OTPLogin($otp, $firstname));
+        if ($user->user_profile->is_otp_enabled) {
+
+            $otp_reason = 'Login user';
+            $generate_otp = new UserOTP();
+            $generate_otp->generateOTP($user->user_profile, $otp_reason);
+            Auth::logout();
+
+            return $this->success([
+                'generate_otp' => 1,
+            ]);
+        }
 
         return $this->success([
             'user' => $user,
@@ -60,7 +68,6 @@ class AuthenticationController extends Controller
                 'gender' => $request->gender,
                 'civil_status' => $request->civil_status,
                 'religion' => $request->religion,
-
                 'job_description' => $request->job_description,
                 'role' => $request->role,
                 'is_admin' => $request->is_admin,
@@ -81,13 +88,10 @@ class AuthenticationController extends Controller
             return $this->success([
                 'user_profile' => $user_profile,
             ]);
-
-
         } catch (\Exception $error) {
             DB::rollBack();
             return $this->error('', $error->getMessage(), 500);
         }
-
     }
 
     public function logout()

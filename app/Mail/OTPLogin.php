@@ -31,7 +31,7 @@ class OTPLogin extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Your One Time Password',
+            subject: 'Your OTP Login',
         );
     }
 

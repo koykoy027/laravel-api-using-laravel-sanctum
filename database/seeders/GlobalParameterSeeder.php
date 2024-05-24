@@ -75,5 +75,18 @@ class GlobalParameterSeeder extends Seeder
             'code' => 1,
             'name' => 'Home Address',
         ]);
+
+        // One Time Password Portal
+        GlobalParameter::create([
+            'type' => 5,
+            'code' => 1,
+            'name' => 'Email',
+        ]);
+        GlobalParameter::create([
+            'type' => 5,
+            'code' => 2,
+            'name' => 'SMS',
+        ]);        
+
     }
 }

@@ -29,6 +29,7 @@ return new class extends Migration
             $table->boolean('is_admin');
             $table->boolean('is_required_to_change_password');
             $table->boolean('is_otp_enabled')->default(false);
+            $table->integer('otp_portal')->nullable()->comment('global_parameter id=5, 1 = email, 2 = sms');
             $table->boolean('is_active')->default(true);
             $table->timestamp('email_verified_at')->nullable();
             $table->integer('created_by')->nullable()->comment('users_profile id');

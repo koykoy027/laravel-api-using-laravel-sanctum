@@ -14,16 +14,24 @@ class GlobalParameterTypeSeeder extends Seeder
     public function run(): void
     {
         GlobalParameterType::create([
-            'name' => 'Gender',
+            'name' => 'Gender', // id = 1
+            'is_show' => 1,
         ]);
         GlobalParameterType::create([
-            'name' => 'Civil Status',
+            'name' => 'Civil Status', // id = 2
+            'is_show' => 1,
         ]);
         GlobalParameterType::create([
-            'name' => 'Religion',
+            'name' => 'Religion', // id = 3
+            'is_show' => 1,
         ]);
         GlobalParameterType::create([
-            'name' => 'Address Information Type',
+            'name' => 'Address Information Type', // id = 4
+            'is_show' => 1,
+        ]);
+        GlobalParameterType::create([
+            'name' => 'One Time Password Portal', // id = 5
+            'is_show' => 0,
         ]);
     }
 }
