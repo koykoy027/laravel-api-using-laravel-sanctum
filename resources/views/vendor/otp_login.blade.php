@@ -21,7 +21,3 @@
 @endcomponent
 
 @endcomponent
-
-<div>
-    
-</div>

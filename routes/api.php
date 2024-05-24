@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticationController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\GlobalParameter\GlobalParameterController;
 use App\Http\Controllers\GlobalParameter\GlobalParameterTypeController;
 use App\Http\Controllers\User\UserController;
@@ -20,17 +22,27 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // token required
 Route::middleware(['auth:sanctum'])->group(function () {
 
+    Route::controller(RegisterController::class)->group(function () {
+        Route::post('/register', 'register');
+    });
+
+    Route::controller(LogoutController::class)->group(function () {
+        Route::post('/logout', 'logout');
+    });
+
     Route::controller(UserController::class)->group(function () {
         Route::get('/users', 'index');
         Route::get('/users/{id}', 'show');
         Route::patch('/users/{id}', 'update');
-    });    
-    
+    });
 });
 
 
 
 // token not required
+Route::controller(LoginController::class)->group(function () {
+    Route::post('/login', 'login');
+});
 
 Route::controller(GlobalParameterTypeController::class)->group(function () {
     Route::get('/global-parameter-type', 'index');
@@ -42,11 +54,4 @@ Route::controller(GlobalParameterTypeController::class)->group(function () {
 Route::controller(GlobalParameterController::class)->group(function () {
     Route::post('/global-parameter', 'store')->middleware('auth:sanctum');
     Route::patch('/global-parameter/{id}', 'update')->middleware('auth:sanctum');
-});
-
-Route::controller(AuthenticationController::class)->group(function () {
-    Route::post('/login', 'login');
-    Route::post('/login-otp-verification/{id}', 'login_otp_verification');
-    Route::post('/register', 'register')->middleware('auth:sanctum');
-    Route::post('/logout', 'logout')->middleware('auth:sanctum');
 });
