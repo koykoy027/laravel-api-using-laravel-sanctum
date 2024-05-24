@@ -1,22 +1,16 @@
 @component('mail::message')
 
-<h1>Welcome {{ $firstname }}!</h1>
-<p>Your account has been successfully created</p>
-<p>Sign in your account using this credentials</p>
+<h1>We're excited to have you here {{ $firstname }}!</h1>
+<p>Your account has been successfully created.</p>
+<p>Sign into your account to access {{ config('app.name') }}. Please use credential below.</p>
 
-<p>
-    Email:
-    <br>
-    <strong>{{ $email }}</strong>
-</p>
-<p>
-    Password: 
-    <br>
-    <strong>{{ $password }}</strong>
-</p>
+<p>Email:</p>
+<h3>{{ $email }}</h3>
+<p>Password:</p>
+<h3>{{ $password }}</h3>
 
 @component('mail::button', ['url' => 'https://github.com/koykoy027?email=' . $email, 'color' => 'primary'])
-Login here
+Sign in
 @endcomponent
 
 <h1>If this wasn't you</h1>
