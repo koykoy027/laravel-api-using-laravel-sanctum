@@ -42,6 +42,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 // token not required
 Route::controller(LoginController::class)->group(function () {
     Route::post('/login', 'login');
+    Route::post('/login-verify-otp/{id}', 'verify_otp');
 });
 
 Route::controller(GlobalParameterTypeController::class)->group(function () {
