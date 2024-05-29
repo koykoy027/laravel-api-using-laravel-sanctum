@@ -51,7 +51,7 @@ class LoginController extends Controller
 
         return $this->success([
             'user' => $user,
-            'token' => $user->createToken('API Token of' . $user->user_profile->firstname)->plainTextToken
+            'token' => $user->createToken('API Token of ' . $user->user_profile->firstname)->plainTextToken
         ]);
     }
 
@@ -71,7 +71,7 @@ class LoginController extends Controller
 
             return $this->success([
                 'user' => $user,
-                'token' => $user->createToken('API Token of' . $user->user_profile->firstname)->plainTextToken
+                'token' => $user->createToken('API Token of ' . $user->user_profile->firstname)->plainTextToken
             ]);
 
         } else {
