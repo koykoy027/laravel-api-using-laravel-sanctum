@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->longText('description')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->integer('created_by')->nullable()->comment('users_profile id');
-            $table->integer('updated_by')->nullable()->comment('users_profile id');
+            $table->integer('created_by')->nullable()->comment('users id');
+            $table->integer('updated_by')->nullable()->comment('users id');
             $table->timestamps();
         });
     }

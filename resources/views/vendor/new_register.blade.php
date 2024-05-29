@@ -9,7 +9,7 @@
 <p>Password:</p>
 <h3>{{ $password }}</h3>
 
-@component('mail::button', ['url' => 'https://github.com/koykoy027?email=' . $email, 'color' => 'primary'])
+@component('mail::button', ['url' => env('ALLOWED_ORIGINS') . '/login?email=' .$email, 'color' => 'primary'])
 Sign in
 @endcomponent
 

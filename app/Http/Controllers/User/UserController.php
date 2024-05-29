@@ -19,8 +19,7 @@ class UserController extends Controller
     public function index()
     {
         $users = UserResource::collection(
-            UserProfile::allActive()
-                ->get()
+            User::all()
         );
 
         return $this->success([
@@ -30,7 +29,7 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $user =  new UserResource(UserProfile::find($id));
+        $user =  new UserResource(User::find($id));
 
         return $this->success([
             'user' => $user,
@@ -40,7 +39,7 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, $id)
     {
         try {
-            
+
             DB::beginTransaction();
 
             $user = UserProfile::find($id);
@@ -58,13 +57,12 @@ class UserController extends Controller
             ] + $this->updated_by());
 
             $user = new UserResource($user);
-            
+
             DB::commit();
 
             return $this->success([
                 'user' => $user,
             ]);
-
         } catch (\Exception $error) {
             DB::rollBack();
             return $this->error('', $error->getMessage(), 500);

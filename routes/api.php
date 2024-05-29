@@ -15,8 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 // authenticated
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    $user_profile = UserProfile::find(Auth::user()->id);
-    return new UserResource($user_profile);
+    return Auth::user();
 });
 
 // token required

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users_addressess', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_profile')->constrained('users_profile');
+            $table->foreignId('user_id')->constrained('users');
             $table->integer('type')->nullable()->comment('global_parameters id=4');
             $table->string('region')->nullable()->comment('api_philippines_regions region_code');
             $table->string('province')->nullable()->comment('api_philippines_provinces province_code');

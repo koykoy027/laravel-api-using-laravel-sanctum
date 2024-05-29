@@ -35,7 +35,7 @@ class LoginController extends Controller
 
             $otp_reason = 'Login user';
             $generate_otp = new UserOTP();
-            $generate_otp->generate_otp($user->user_profile, $otp_reason);
+            $generate_otp->generate_otp($user, $otp_reason);
 
             $id = Auth::user()->id;
             $email = Auth::user()->email;
@@ -51,7 +51,7 @@ class LoginController extends Controller
 
         return $this->success([
             'user' => $user,
-            'token' => $user->createToken('API Token of' . $user->name)->plainTextToken
+            'token' => $user->createToken('API Token of' . $user->user_profile->firstname)->plainTextToken
         ]);
     }
 
@@ -62,7 +62,7 @@ class LoginController extends Controller
         if (!$user) {
             return $this->error('', 'User not found', 404);
         }
-        $latest_otp = UserOTP::latest_otp($user->user_profile);
+        $latest_otp = UserOTP::latest_otp($user);
 
         if ($latest_otp->otp == $request->otp) {
             if (Carbon::now()->gt(Carbon::parse($latest_otp->expired_at))) {
@@ -71,7 +71,7 @@ class LoginController extends Controller
 
             return $this->success([
                 'user' => $user,
-                'token' => $user->createToken('API Token of' . $user->name)->plainTextToken
+                'token' => $user->createToken('API Token of' . $user->user_profile->firstname)->plainTextToken
             ]);
 
         } else {

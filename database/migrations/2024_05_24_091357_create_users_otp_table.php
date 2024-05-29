@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users_otp', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_profile')->nullable()->constrained('users_profile');
+            $table->foreignId('user_id')->nullable()->constrained('users');
             $table->integer('otp_portal')->nullable()->comment('global_parameter_type id=5, 1 = email, 2=sms');
             $table->string('otp')->nullable()->comment('auto generated');
             $table->string('otp_reason')->nullable();

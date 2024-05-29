@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('province_code')->nullable();
             $table->string('city_code')->nullable();
             $table->string('district')->nullable();
-            $table->integer('created_by')->nullable()->comment('users_profile id');
-            $table->integer('updated_by')->nullable()->comment('users_profile id');
+            $table->integer('created_by')->nullable()->comment('users id');
+            $table->integer('updated_by')->nullable()->comment('users id');
             $table->timestamps();
         });
     }

@@ -26,15 +26,10 @@ class UserProfile extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function user_address() :HasMany
-    {
-        return $this->hasMany(UserAddress::class, 'users_profile', 'id');
-    }
-
-    public function user_otp() :HasMany
+    public function user_otp(): HasMany
     {
         return $this->hasMany(UserOTP::class, 'users_profile', 'id');
     }

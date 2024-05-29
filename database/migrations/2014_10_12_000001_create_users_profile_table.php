@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users_profile', function (Blueprint $table) {
-            $table->id();
+            $table->foreignId('id')->primary()->constrained('users');
             // personal information
             $table->string('suffix')->nullable();
             $table->string('firstname')->nullable();
@@ -32,8 +32,8 @@ return new class extends Migration
             $table->integer('otp_portal')->nullable()->comment('global_parameter id=5, 1 = email, 2 = sms');
             $table->boolean('is_active')->default(true);
             $table->timestamp('email_verified_at')->nullable();
-            $table->integer('created_by')->nullable()->comment('users_profile id');
-            $table->integer('updated_by')->nullable()->comment('users_profile id');
+            $table->integer('created_by')->nullable()->comment('users id');
+            $table->integer('updated_by')->nullable()->comment('users id');
             $table->timestamps();
         });
     }

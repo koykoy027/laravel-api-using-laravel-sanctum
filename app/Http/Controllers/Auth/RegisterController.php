@@ -34,7 +34,13 @@ class RegisterController extends Controller
         try {
             DB::beginTransaction();
 
-            $user_profile = UserProfile::create([
+            $user = User::create([
+                'email' => $email,
+                'password' => Hash::make($password),
+            ]);
+
+            UserProfile::create([
+                'id' => $user->id,
                 'suffix' => $request->suffix,
                 'firstname' => $request->firstname,
                 'middlename' => $request->middlename,
@@ -49,19 +55,13 @@ class RegisterController extends Controller
 
             ] + $this->created_by_and_updated_by());
 
-            User::create([
-                'id' => $user_profile->id,
-                'email' => $request->email,
-                'password' => Hash::make($password),
-            ]);
-
-            $user_profile = new UserResource($user_profile);
+            $user = new UserResource($user);
             Mail::to($email)->send(new NewRegister($email, $password, $firstname));
             
             DB::commit();
 
             return $this->success([
-                'user_profile' => $user_profile,
+                'user' => $user,
             ]);
         } catch (\Exception $error) {
             DB::rollBack();

@@ -15,31 +15,32 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $userProfile = UserProfile::create([
+
+        $user = User::create([
+            'email' => 'villanuevajoshua27@gmail.com',
+            'password' => 'Pa$$w0rd!',
+        ]);
+
+        UserProfile::create([
+            'id' => $user->id,
             'suffix' => '',
             'firstname' => 'Joshua',
             'middlename' => 'Alfaro',
             'lastname' => 'Villanueva',
             'gender' => 1,
-            'civil_status' => 3,
-            'religion' => 7,
+            'civil_status' => 1,
+            'religion' => 1,
             'role' => '',
             'is_admin' => true,
             'is_required_to_change_password' => false,
             'is_otp_enabled' => false,
             'is_active' => true,
             'email_verified_at' => now(),
-            
-        ]);
-        User::create([
-            'id' => $userProfile->id,
-            'email' => 'villanuevajoshua27@gmail.com',
-            'password' => 'Pa$$w0rd!',
-            
         ]);
 
+
         UserAddress::create([
-            'users_profile' => $userProfile->id,
+            'user_id' => $user->id,
             'type' => '1',
             'region' => '03',
             'province' => '0314',
@@ -48,7 +49,5 @@ class UserSeeder extends Seeder
             'address' => 'Blk 20 Lot 24 Daisy Street Evergreen Heights',
             'zip_code' => '3023',
         ]);
-
-        
     }
 }
