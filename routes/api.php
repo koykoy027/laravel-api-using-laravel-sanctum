@@ -6,8 +6,6 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\GlobalParameter\GlobalParameterController;
 use App\Http\Controllers\GlobalParameter\GlobalParameterTypeController;
 use App\Http\Controllers\User\UserController;
-use App\Http\Resources\UserResource;
-use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
